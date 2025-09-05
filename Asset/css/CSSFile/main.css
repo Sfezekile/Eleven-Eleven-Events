@@ -254,7 +254,7 @@ button {
 }
 
 .nav-link:hover {
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .nav-link::after {
@@ -264,7 +264,7 @@ button {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--secondary);
+    background: var(--primary);
     transition: var(--transition-base);
 }
 
@@ -898,4 +898,5 @@ button {
     opacity: 0.5;
 
 }
+
 
