@@ -1,0 +1,137 @@
+/*
+:root {  Semantic color tokens (HSL) 
+    --background: 0 0% 100%; 
+    --foreground: 224 10% 10%; 
+    --card: 0 0% 100%; 
+    --border: 220 14% 92%; 
+    --primary: 262 83% 58%; 
+    --primary-foreground: 0 0% 100%; 
+    --muted-foreground: 220 9% 46%; 
+    --overlay-dark: 240 10% 4%;
+    /* Layout & effects */
+    /*
+    --radius: 16px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-elegant: 0 14px 28px -12px hsl(var(--primary) / 0.22);
+    --shadow-glow: 0 24px 46px -18px hsl(var(--primary) / 0.35);
+    --container-max: 1100px;
+    --section-padding: clamp(2rem, 5vw + 1rem, 5rem);
+}
+
+* { 
+    box-sizing: border-box; 
+}
+body {
+  margin: 0; 
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: hsl(var(--foreground)); 
+  background: hsl(var(--background));
+}*/ 
+
+.container {
+  width: 100%; 
+  max-width: var(--container-max); 
+  margin: 0 auto; 
+  padding: 0 1.25rem;
+}
+
+/* Gallery */
+.gallery { 
+    padding: var(--section-padding); 
+    background: hsl(var(--background)); 
+}
+.section-title {
+  margin: 0 0 0.5rem; 
+  font-size: clamp(1.625rem, 1.2rem + 1.5vw, 2.25rem);
+  font-weight: 800; 
+  letter-spacing: -0.02em;
+}
+.section-subtitle {
+  margin: 0 0 2rem; 
+  color: hsl(var(--muted-foreground)); 
+  font-size: 0.975rem;
+}
+
+.gallery-grid {
+  display: grid; 
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.gallery-item {
+  position: relative; 
+  border-radius: var(--radius); 
+  overflow: hidden;
+  background: hsl(var(--card)); 
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-elegant); 
+  transition: var(--transition-smooth);
+  isolation: isolate;
+}
+.gallery-item:hover { 
+    transform: translateY(-6px); 
+    box-shadow: var(--shadow-glow); 
+}
+
+.media { 
+    position: relative; 
+    aspect-ratio: 4 / 3; 
+}
+.poster, .video {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+.poster { 
+    background-position: center;
+    transform: scale(1); 
+}
+.poster:hover {
+    display: none;
+}
+.gallery-item:hover .poster { 
+    transform: scale(1.05); 
+}
+
+.video {
+  position: absolute; 
+  inset: 0; 
+  opacity: 0; 
+  z-index:  -1000;
+  pointer-events: none;
+  /* Keeps poster beneath visible when hidden */
+}
+.gallery-item.playing .video { 
+    opacity: 1; 
+}
+
+.overlay {
+  position: absolute; 
+  inset-inline: 0; 
+  bottom: 0;
+  padding: 1.25rem; 
+  color: hsl(var(--primary-foreground));
+  background: linear-gradient(to top,
+      hsl(var(--overlay-dark) / 0.88) 0%,
+      hsl(var(--overlay-dark) / 0.55) 45%,
+      transparent 100%);
+  transform: translateY(100%); 
+  transition: transform 300ms ease;
+  z-index: 2;
+}
+.gallery-item:hover .overlay { 
+    transform: translateY(0); 
+}
+
+.overlay h3 { 
+    margin: 0 0 0.4rem; 
+    font-size: 1.05rem; 
+    font-weight: 700; 
+}
+.overlay p { 
+    margin: 0; 
+    font-size: 0.9rem; 
+    opacity: 0.95; 
+}
