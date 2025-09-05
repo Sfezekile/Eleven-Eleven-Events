@@ -254,7 +254,7 @@ button {
 }
 
 .nav-link:hover {
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 .nav-link::after {
@@ -896,4 +896,5 @@ button {
 
 .footer-legal span {
     opacity: 0.5;
+
 }
