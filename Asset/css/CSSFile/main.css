@@ -264,7 +264,7 @@ button {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--primary);
+    background: var(--secondary);
     transition: var(--transition-base);
 }
 
@@ -898,3 +898,4 @@ button {
     opacity: 0.5;
 
 }
+
