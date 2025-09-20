@@ -254,7 +254,7 @@ button {
 }
 
 .nav-link:hover {
-    color: var(--primary);
+    color: var(--primary-accent);
 }
 
 .nav-link::after {
@@ -898,6 +898,7 @@ button {
     opacity: 0.5;
 
 }
+
 
 
 
