@@ -214,7 +214,7 @@ button {
     right: 0;
     z-index: 1000;
     transition: var(--transition-base);
-    padding: 1rem 0;
+    padding: 0 0 1rem 0;
 }
 
 .navbar.scrolled {
@@ -898,3 +898,4 @@ button {
     opacity: 0.5;
 
 }
+
