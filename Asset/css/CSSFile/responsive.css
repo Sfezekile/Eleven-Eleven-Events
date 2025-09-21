@@ -349,12 +349,12 @@
     }
 }
 
-/* Dark Mode Support */ 
+/* Dark Mode Support 
 @media (prefers-color-scheme: dark) {
     .navbar.scrolled {
         background: rgba(20, 20, 20, 0.95);
     }
-}
+}*/ 
 
 /* Print Styles */
 @media print {
@@ -397,4 +397,5 @@
     }
 
 }
+
 
