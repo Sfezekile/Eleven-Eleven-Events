@@ -232,7 +232,7 @@
 }
 
 /* Small Mobile */
-@media (max-width: 320px) {
+@media (max-width: 480px) {
     :root {
         --container-padding: 0.75rem;
         --section-padding: 2.5rem 0;
@@ -240,6 +240,7 @@
     
     .nav-container {
         padding: 0 1rem;
+        
     }
     
     .nav-logo .logo {
@@ -349,12 +350,12 @@
     }
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support 
 @media (prefers-color-scheme: dark) {
     .navbar.scrolled {
         background: rgba(20, 20, 20, 0.95);
     }
-}
+}*/
 
 /* Print Styles */
 @media print {
@@ -395,6 +396,4 @@
     .contact-content {
         page-break-inside: avoid;
     }
-
 }
-
