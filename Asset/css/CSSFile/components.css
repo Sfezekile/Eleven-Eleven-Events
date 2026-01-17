@@ -54,10 +54,19 @@
 }
 
 .btn-booking {
-    background: var(--gradient-accent);
+    border: none;
+    border-radius: 20px;
+    background-color: var(--foreground);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--background);
+    padding: 9px 19px;
+    border-radius: 50px;
+}
+#nav-book-btn {
+    background-color: var(--background);
     color: var(--foreground);
-    font-weight: 600;
-    box-shadow: var(--shadow-soft);
+    font-weight: 500;
 }
 
 .btn-booking:hover {
@@ -73,7 +82,17 @@
 
 /* Form Styles */
 .form-group {
+    margin-top: 3vh;
     margin-bottom: 1.5rem;
+    text-align: left;
+}
+.form-group.name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.name-input {
+    text-align: left;
 }
 
 .form-group label {
@@ -122,12 +141,6 @@
 }
 
 /* Contact Form Specific */
-.contact-form {
-    background: var(--card);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-elegant);
-}
 
 /* Modal Styles */
 .modal {
@@ -207,22 +220,39 @@
 
 /* Success/Error Messages */
 .message {
-    padding: 1rem;
+    position: fixed;
+    top: 25px;
+    right: 20px;
+    padding: 1rem 1.5rem;
     border-radius: 0.5rem;
-    margin-bottom: 1rem;
     font-weight: 500;
+    z-index: 9999;
+    max-width: 400px;
+    box-shadow: var(--shadow-elegant);
+    animation: slideInFromRight 0.5s ease-out;
+    cursor: pointer;
 }
 
 .message.success {
-    background: hsl(142, 76%, 36%, 0.1);
-    border: 1px solid hsl(142, 76%, 36%, 0.3);
-    color: hsl(142, 76%, 36%);
+    background: #333333;
+    color: var(--background);
 }
 
 .message.error {
-    background: hsl(0, 84%, 60%, 0.1);
+    background: 333333;
     border: 1px solid hsl(0, 84%, 60%, 0.3);
     color: hsl(0, 84%, 60%);
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* Loading States */
