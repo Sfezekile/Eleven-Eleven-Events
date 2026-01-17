@@ -1,6 +1,9 @@
 // Eleven Eleven Events - Main JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS with your public key
+    emailjs.init("xhF-F6jL3C56vfff-"); // Replace with your actual public key
+    
     // Initialize all components
     initNavigation();
     initHeroSlideshow();
@@ -149,7 +152,7 @@ function initReviewsSlider() {
             event: "Birthday Party", 
             date: "10 December 2024",
             rating: 5,
-            text: "I would just like to say thank you so much to the Eleven Eleven Events team for making my birthday special. I hardly had a set concept for the décor but my expectations were highly exceeded. I would recommend Eleven Eleven Events to anyone, in a heartbeat 😊"
+            text: "I would just like to say thank you so much to the Eleven Eleven Events team for making my birthday special. I hardly had a set concept for the decor but my expectations were highly exceeded. I would recommend Eleven Eleven Events to anyone, in a heartbeat 😊"
         },
         {
             name: "Zinhle",
@@ -245,6 +248,7 @@ function initBookingModal() {
     const bookingBtns = document.querySelectorAll('#nav-book-btn, #hero-book-btn');
     const closeBtn = document.getElementById('modal-close');
     const bookingForm = document.getElementById('booking-form');
+    const contactForm = document.getElementById('contact-form');
 
     // Open modal
     bookingBtns.forEach(btn => {
@@ -293,16 +297,56 @@ function initBookingModal() {
             submitBtn.textContent = 'Manifesting Your Event...';
             submitBtn.disabled = true;
             
-            // Simulate form submission
-            setTimeout(() => {
-                showMessage('Booking request sent! We\'ll contact you within 24 hours to discuss your dream event.', 'success');
-                this.reset();
-                closeModal();
-                
-                // Reset button
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
+            // Send email using EmailJS
+            emailjs.send('service_q5op5eg', 'template_m0yin89', data)
+                .then(() => {
+                    showMessage('✅ Booking request sent! We\'ll contact you within 24 hours to discuss your dream event.', 'success');
+                    this.reset();
+                    closeModal();
+                })
+                .catch((error) => {
+                    console.error('EmailJS error:', error);
+                    showMessage('❌ There was an error sending your booking request. Please try again or contact us directly.', 'error');
+                })
+                .finally(() => {
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+    }
+
+    // Handle form submission
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS
+            emailjs.send('service_q5op5eg', 'template_m0yin89', data)
+                .then(() => {
+                    showMessage('✅ Contact request sent! We\'ll contact you within 24 hours to discuss your dream event.', 'success');
+                    this.reset();
+                    closeModal();
+                })
+                .catch((error) => {
+                    console.error('EmailJS error:', error);
+                    showMessage('❌ There was an error sending your contact request. Please try again or contact us directly.', 'error');
+                })
+                .finally(() => {
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
         });
     }
 }
@@ -486,3 +530,26 @@ if ('serviceWorker' in navigator) {
         // navigator.serviceWorker.register('/sw.js');
     });
 }
+
+// Lazy load videos when they enter the viewport
+document.addEventListener('DOMContentLoaded', function() {
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                video.src = video.getAttribute('data-src');
+                video.classList.add('loaded');
+                videoObserver.unobserve(video);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.gallery-video').forEach(video => {
+        // Store original source in data attribute
+        const source = video.querySelector('source');
+        video.setAttribute('data-src', source.src);
+        source.removeAttribute('src');
+        
+        videoObserver.observe(video);
+    });
+});
